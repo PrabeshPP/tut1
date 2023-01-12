@@ -4,4 +4,6 @@ app=FastAPI()
 
 @app.get("/")
 def index():
-    return "Hello!"
+    return {'data':{
+        'name':"Prabesh"
+    }}
