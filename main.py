@@ -3,8 +3,20 @@ from fastapi.params import Body
 from pydantic import BaseModel
 from typing import Optional
 from random import randrange
+from . import models
+from .database import engine,SessionLocal
+from sqlalchemy.orm import Session
+#connecting to Database
+models.Base.metadata.create_all(bind=engine)
 
 app=FastAPI()
+
+def get_db():
+    db=SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 my_posts=[{"title":"Title of Post 1","content":"content of post 1","id":1},
 {"title":"Pork","content":"Pork is my favourite meat","id":2}]
